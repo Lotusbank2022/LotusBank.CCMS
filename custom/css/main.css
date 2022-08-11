@@ -1,0 +1,90 @@
+﻿.header {
+    margin: 0 auto;
+    background-image: url(images/logo2.png);
+    background-color: #FFFFFF;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 100%;
+    height: 100px;
+    position: fixed;
+    left: 0px;
+    right: 0px;
+    top: -1px;
+    z-index: 99;
+    transition: all ease-in-out 250ms;
+    border-bottom: solid 1px rgba(0,0,0,0.1);
+    box-shadow: 0 5px 5px 2px rgba(0,0,0,0.1);
+    border-bottom: solid 3px #ff9800;
+    font-size: 35px;
+    font-weight: 700;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    padding-top: 20px;
+}
+
+.footer {
+    margin: 0 auto;
+    background-image: url(images/logo2.png);
+    background-color: #FFFFFF;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 100%;
+    height: 100px;
+    position: fixed;
+    left: 0px;
+    right: 0px;
+    bottom: 150px;
+    z-index: 99;
+    transition: all ease-in-out 250ms;
+    border-top: solid 1px rgba(0,0,0,0.1);
+    box-shadow: 0 5px 5px 2px rgba(0,0,0,0.1);
+    border-top: solid 3px #ff9800;
+    font-size: 15px;
+    font-weight: 700;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    padding-top: 20px;
+}
+
+.decorationline {
+    margin: 0px 20px 30px 20px;
+    background-color: rgba(0,0,0,0.1);
+    height: 1px;
+    background-color: rgba(0,0,0,0.1);
+}
+
+.body {
+    font-family: 'Roboto', sans-serif;
+    background-color: white;
+}
+
+.menuicon {
+    border-radius: 50px;
+    border-color: #4caf50;
+    border-style: solid;
+    border-width: 1px;
+    padding: 20px;
+    margin-right: 15px;
+}
+
+
+.mainmenuitem {
+    cursor: pointer;
+}
+
+.signoutbtn {
+    font-size: 17px;
+    border: 1px solid #cccccc;
+    background-color: #ffffff;
+    color: #000000;
+    display: inline-block;
+    padding: 16px 32px;
+    vertical-align: middle;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    background-color: inherit;
+    text-align: center;
+    cursor: pointer;
+    white-space: nowrap;
+}

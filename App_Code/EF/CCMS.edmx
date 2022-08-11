@@ -1,0 +1,919 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CCMSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ApplicationResources">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ResouceName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CCMS.dbo.ComplaintsCategory' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ComplaintsCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryId" Type="int" />
+          <Property Name="CategoryName" Type="varchar" MaxLength="50" />
+          <Property Name="Notify" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CCMS.dbo.ComplaintsCategoryMatrix' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ComplaintsCategoryMatrix">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryId" Type="int" Nullable="false" />
+          <Property Name="SubCategory" Type="varchar" MaxLength="200" />
+          <Property Name="SLA" Type="varchar" MaxLength="50" />
+          <Property Name="InternalSLA" Type="varchar" MaxLength="50" />
+          <Property Name="CBNCode" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="CustomerComplaints">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tracking_Reference_Number" Type="varchar" MaxLength="50" />
+          <Property Name="Account_Branch_Name" Type="varchar" MaxLength="50" />
+          <Property Name="Name_Of_Consultant" Type="varchar" MaxLength="100" />
+          <Property Name="Type_Of_Client" Type="varchar" MaxLength="10" />
+          <Property Name="Name_Of_Complainant" Type="varchar" MaxLength="250" />
+          <Property Name="First_Name" Type="varchar" MaxLength="100" />
+          <Property Name="Middle_Name" Type="varchar" MaxLength="100" />
+          <Property Name="Last_Name" Type="varchar" MaxLength="100" />
+          <Property Name="Unique_Identification_No" Type="varchar" MaxLength="15" />
+          <Property Name="Account_Number" Type="varchar" MaxLength="10" />
+          <Property Name="Account_Type" Type="varchar" MaxLength="20" />
+          <Property Name="Account_Currency" Type="varchar" MaxLength="3" />
+          <Property Name="Address1" Type="varchar" MaxLength="255" />
+          <Property Name="Address2" Type="varchar" MaxLength="255" />
+          <Property Name="City" Type="varchar" MaxLength="50" />
+          <Property Name="State" Type="varchar" MaxLength="50" />
+          <Property Name="Country" Type="varchar" MaxLength="3" />
+          <Property Name="Postal_Code" Type="varchar" MaxLength="20" />
+          <Property Name="Cell_Phone_Number" Type="varchar" MaxLength="20" />
+          <Property Name="Office_Number" Type="varchar" MaxLength="20" />
+          <Property Name="Complaint_Channel" Type="varchar" MaxLength="20" />
+          <Property Name="Complaint_Location_Branch" Type="varchar" MaxLength="100" />
+          <Property Name="Complaint_Location_City" Type="varchar" MaxLength="100" />
+          <Property Name="Email_Address" Type="varchar" MaxLength="100" />
+          <Property Name="Complaint_Category" Type="varchar" MaxLength="100" />
+          <Property Name="Complaint_Sub_Category" Type="varchar" MaxLength="100" />
+          <Property Name="Complaint_Sub_Category_Code" Type="varchar" MaxLength="4" />
+          <Property Name="Subject_Of_Complaint" Type="varchar" MaxLength="255" />
+          <Property Name="Complaint_Description" Type="varchar" MaxLength="5000" />
+          <Property Name="Date_Received" Type="varchar" MaxLength="50" />
+          <Property Name="Date_Closed" Type="varchar" MaxLength="50" />
+          <Property Name="Description_of_Resolution" Type="varchar(max)" />
+          <Property Name="Amount_In_Dispute" Type="numeric" Precision="16" Scale="4" />
+          <Property Name="Amount_Refunded_Petitioner" Type="numeric" Precision="16" Scale="4" />
+          <Property Name="Amount_Recovered_by_Bank" Type="numeric" Precision="16" Scale="4" />
+          <Property Name="Action_Taken" Type="varchar" MaxLength="100" />
+          <Property Name="Status_Of_Complaint" Type="varchar" MaxLength="20" />
+          <Property Name="Remarks_by_Bank" Type="varchar" MaxLength="5000" />
+          <Property Name="Date_Created" Type="datetime" />
+          <Property Name="Date_Modifiied" Type="datetime" />
+          <Property Name="Created_By" Type="varchar" MaxLength="50" />
+          <Property Name="Modified_By" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ErrorLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Method" Type="varchar" MaxLength="500" />
+          <Property Name="LineNumber" Type="varchar" MaxLength="50" />
+          <Property Name="Message" Type="text" />
+          <Property Name="OtherInfo" Type="text" />
+        </EntityType>
+        <EntityType Name="GroupResources">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Group_Id" Type="int" Nullable="false" />
+          <Property Name="ApplicationResource_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GroupName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Status" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="defaultpage" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Login" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SessionID" Type="varchar" MaxLength="50" />
+          <Property Name="Supervisor_id" Type="varchar" MaxLength="50" />
+          <Property Name="Supervisor_email" Type="varchar" MaxLength="50" />
+          <Property Name="LastLoginDate" Type="datetime" />
+          <Property Name="Status" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CaptureDate" Type="datetime" />
+          <Property Name="CapturedBy" Type="varchar" MaxLength="50" />
+          <Property Name="Group_Id" Type="int" />
+          <Property Name="UserType" Type="varchar" MaxLength="50" />
+          <Property Name="Branch" Type="varchar" MaxLength="50" />
+          <Property Name="TeamEmail" Type="varchar" MaxLength="100" />
+          <Property Name="CategoryName" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="UsersLogs">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="varchar" MaxLength="50" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" />
+          <Property Name="UserRole" Type="varchar" MaxLength="50" />
+          <Property Name="BranchID" Type="varchar" MaxLength="50" />
+          <Property Name="BranchName" Type="varchar" MaxLength="50" />
+          <Property Name="IPAddress" Type="varchar" MaxLength="50" />
+          <Property Name="LoginTime" Type="datetime" />
+          <Property Name="LogoutTime" Type="datetime" />
+          <Property Name="isLoggedIn" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CCMS.dbo.GroupResources_View' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="GroupResources_View">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="GroupName" />
+            <PropertyRef Name="Status" />
+            <PropertyRef Name="Resource_Id" />
+            <PropertyRef Name="ResouceName" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="GroupName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Status" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Resource_Id" Type="int" Nullable="false" />
+          <Property Name="ResouceName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="defaultpage" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CCMS.dbo.SLAStatus_view' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="SLAStatus_view">
+          <Key>
+            <PropertyRef Name="Supervisor_email" />
+            <PropertyRef Name="SLA_STATUS" />
+          </Key>
+          <Property Name="Tracking_Reference_Number" Type="varchar" MaxLength="50" />
+          <Property Name="Account_Branch_Name" Type="varchar" MaxLength="50" />
+          <Property Name="Name_Of_Consultant" Type="varchar" MaxLength="100" />
+          <Property Name="Type_Of_Client" Type="varchar" MaxLength="10" />
+          <Property Name="Name_Of_Complainant" Type="varchar" MaxLength="250" />
+          <Property Name="First_Name" Type="varchar" MaxLength="100" />
+          <Property Name="Middle_Name" Type="varchar" MaxLength="100" />
+          <Property Name="Last_Name" Type="varchar" MaxLength="100" />
+          <Property Name="Unique_Identification_No" Type="varchar" MaxLength="15" />
+          <Property Name="Account_Number" Type="varchar" MaxLength="10" />
+          <Property Name="Account_Type" Type="varchar" MaxLength="20" />
+          <Property Name="Account_Currency" Type="varchar" MaxLength="3" />
+          <Property Name="Address1" Type="varchar" MaxLength="255" />
+          <Property Name="Address2" Type="varchar" MaxLength="255" />
+          <Property Name="City" Type="varchar" MaxLength="50" />
+          <Property Name="State" Type="varchar" MaxLength="50" />
+          <Property Name="Country" Type="varchar" MaxLength="3" />
+          <Property Name="Postal_Code" Type="varchar" MaxLength="20" />
+          <Property Name="Cell_Phone_Number" Type="varchar" MaxLength="20" />
+          <Property Name="Office_Number" Type="varchar" MaxLength="20" />
+          <Property Name="Complaint_Channel" Type="varchar" MaxLength="20" />
+          <Property Name="Complaint_Location_Branch" Type="varchar" MaxLength="100" />
+          <Property Name="Email_Address" Type="varchar" MaxLength="100" />
+          <Property Name="Complaint_Category" Type="varchar" MaxLength="100" />
+          <Property Name="Complaint_Sub_Category_Code" Type="varchar" MaxLength="4" />
+          <Property Name="Subject_Of_Complaint" Type="varchar" MaxLength="255" />
+          <Property Name="Complaint_Description" Type="varchar" MaxLength="5000" />
+          <Property Name="Date_Received" Type="varchar" MaxLength="50" />
+          <Property Name="Date_Closed" Type="varchar" MaxLength="50" />
+          <Property Name="Amount_In_Dispute" Type="numeric" Precision="16" Scale="4" />
+          <Property Name="Amount_Refunded_Petitioner" Type="numeric" Precision="16" Scale="4" />
+          <Property Name="Amount_Recovered_by_Bank" Type="numeric" Precision="16" Scale="4" />
+          <Property Name="Action_Taken" Type="varchar" MaxLength="100" />
+          <Property Name="Status_Of_Complaint" Type="varchar" MaxLength="20" />
+          <Property Name="Remarks_by_Bank" Type="varchar" MaxLength="5000" />
+          <Property Name="Date_Created" Type="varchar" MaxLength="10" />
+          <Property Name="Created_By" Type="varchar" MaxLength="50" />
+          <Property Name="Supervisor_email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Date_Modifiied" Type="varchar" MaxLength="10" />
+          <Property Name="Modified_By" Type="varchar" MaxLength="50" />
+          <Property Name="CBN_SLA_Limit_in_days" Type="varchar" MaxLength="50" />
+          <Property Name="Internal_Limit_in_days" Type="varchar" MaxLength="50" />
+          <Property Name="SLA_STATUS" Type="varchar" MaxLength="41" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CCMS.dbo.SLAViolationChecker_view' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="SLAViolationChecker_view">
+          <Key>
+            <PropertyRef Name="Supervisor_email" />
+            <PropertyRef Name="SLA_STATUS" />
+          </Key>
+          <Property Name="Tracking_Reference_Number" Type="varchar" MaxLength="50" />
+          <Property Name="Name_Of_Complainant" Type="varchar" MaxLength="250" />
+          <Property Name="Subject_Of_Complaint" Type="varchar" MaxLength="255" />
+          <Property Name="Complaint_Description" Type="varchar" MaxLength="5000" />
+          <Property Name="Date_Received" Type="varchar" MaxLength="50" />
+          <Property Name="Account_Branch_Name" Type="varchar" MaxLength="50" />
+          <Property Name="Date_Created" Type="datetime" />
+          <Property Name="Created_By" Type="varchar" MaxLength="50" />
+          <Property Name="Supervisor_email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Date_Modifiied" Type="datetime" />
+          <Property Name="Modified_By" Type="varchar" MaxLength="50" />
+          <Property Name="CBN_SLA_Limit" Type="varchar" MaxLength="50" />
+          <Property Name="Internal_Limit" Type="varchar" MaxLength="50" />
+          <Property Name="DateDiff" Type="int" />
+          <Property Name="SLA_STATUS" Type="varchar" MaxLength="19" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CCMS.dbo.User_View' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="User_View">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Login" />
+            <PropertyRef Name="UserStatus" />
+            <PropertyRef Name="GroupName" />
+            <PropertyRef Name="GroupStatus" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Login" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Group_Id" Type="int" />
+          <Property Name="LastLoginDate" Type="datetime" />
+          <Property Name="UserStatus" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CapturedBy" Type="varchar" MaxLength="50" />
+          <Property Name="CaptureDate" Type="datetime" />
+          <Property Name="GroupName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="GroupStatus" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="defaultpage" Type="varchar" MaxLength="50" />
+          <Property Name="UserType" Type="varchar" MaxLength="50" />
+          <Property Name="CategoryName" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityContainer Name="CCMSModelStoreContainer">
+          <EntitySet Name="ApplicationResources" EntityType="Self.ApplicationResources" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CustomerComplaints" EntityType="Self.CustomerComplaints" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ErrorLog" EntityType="Self.ErrorLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GroupResources" EntityType="Self.GroupResources" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserGroup" EntityType="Self.UserGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UsersLogs" EntityType="Self.UsersLogs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ComplaintsCategory" EntityType="Self.ComplaintsCategory" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ComplaintsCategory].[Id] AS [Id], 
+    [ComplaintsCategory].[CategoryId] AS [CategoryId], 
+    [ComplaintsCategory].[CategoryName] AS [CategoryName], 
+    [ComplaintsCategory].[Notify] AS [Notify]
+    FROM [dbo].[ComplaintsCategory] AS [ComplaintsCategory]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ComplaintsCategoryMatrix" EntityType="Self.ComplaintsCategoryMatrix" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ComplaintsCategoryMatrix].[Id] AS [Id], 
+    [ComplaintsCategoryMatrix].[CategoryId] AS [CategoryId], 
+    [ComplaintsCategoryMatrix].[SubCategory] AS [SubCategory], 
+    [ComplaintsCategoryMatrix].[SLA] AS [SLA], 
+    [ComplaintsCategoryMatrix].[InternalSLA] AS [InternalSLA], 
+    [ComplaintsCategoryMatrix].[CBNCode] AS [CBNCode]
+    FROM [dbo].[ComplaintsCategoryMatrix] AS [ComplaintsCategoryMatrix]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="GroupResources_View" EntityType="Self.GroupResources_View" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [GroupResources_View].[Id] AS [Id], 
+    [GroupResources_View].[GroupName] AS [GroupName], 
+    [GroupResources_View].[Status] AS [Status], 
+    [GroupResources_View].[Resource_Id] AS [Resource_Id], 
+    [GroupResources_View].[ResouceName] AS [ResouceName], 
+    [GroupResources_View].[defaultpage] AS [defaultpage]
+    FROM [dbo].[GroupResources_View] AS [GroupResources_View]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="SLAStatus_view" EntityType="Self.SLAStatus_view" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [SLAStatus_view].[Tracking_Reference_Number] AS [Tracking_Reference_Number], 
+    [SLAStatus_view].[Account_Branch_Name] AS [Account_Branch_Name], 
+    [SLAStatus_view].[Name_Of_Consultant] AS [Name_Of_Consultant], 
+    [SLAStatus_view].[Type_Of_Client] AS [Type_Of_Client], 
+    [SLAStatus_view].[Name_Of_Complainant] AS [Name_Of_Complainant], 
+    [SLAStatus_view].[First_Name] AS [First_Name], 
+    [SLAStatus_view].[Middle_Name] AS [Middle_Name], 
+    [SLAStatus_view].[Last_Name] AS [Last_Name], 
+    [SLAStatus_view].[Unique_Identification_No] AS [Unique_Identification_No], 
+    [SLAStatus_view].[Account_Number] AS [Account_Number], 
+    [SLAStatus_view].[Account_Type] AS [Account_Type], 
+    [SLAStatus_view].[Account_Currency] AS [Account_Currency], 
+    [SLAStatus_view].[Address1] AS [Address1], 
+    [SLAStatus_view].[Address2] AS [Address2], 
+    [SLAStatus_view].[City] AS [City], 
+    [SLAStatus_view].[State] AS [State], 
+    [SLAStatus_view].[Country] AS [Country], 
+    [SLAStatus_view].[Postal_Code] AS [Postal_Code], 
+    [SLAStatus_view].[Cell_Phone_Number] AS [Cell_Phone_Number], 
+    [SLAStatus_view].[Office_Number] AS [Office_Number], 
+    [SLAStatus_view].[Complaint_Channel] AS [Complaint_Channel], 
+    [SLAStatus_view].[Complaint_Location_Branch] AS [Complaint_Location_Branch], 
+    [SLAStatus_view].[Email_Address] AS [Email_Address], 
+    [SLAStatus_view].[Complaint_Category] AS [Complaint_Category], 
+    [SLAStatus_view].[Complaint_Sub_Category_Code] AS [Complaint_Sub_Category_Code], 
+    [SLAStatus_view].[Subject_Of_Complaint] AS [Subject_Of_Complaint], 
+    [SLAStatus_view].[Complaint_Description] AS [Complaint_Description], 
+    [SLAStatus_view].[Date_Received] AS [Date_Received], 
+    [SLAStatus_view].[Date_Closed] AS [Date_Closed], 
+    [SLAStatus_view].[Amount_In_Dispute] AS [Amount_In_Dispute], 
+    [SLAStatus_view].[Amount_Refunded_Petitioner] AS [Amount_Refunded_Petitioner], 
+    [SLAStatus_view].[Amount_Recovered_by_Bank] AS [Amount_Recovered_by_Bank], 
+    [SLAStatus_view].[Action_Taken] AS [Action_Taken], 
+    [SLAStatus_view].[Status_Of_Complaint] AS [Status_Of_Complaint], 
+    [SLAStatus_view].[Remarks_by_Bank] AS [Remarks_by_Bank], 
+    [SLAStatus_view].[Date_Created] AS [Date_Created], 
+    [SLAStatus_view].[Created_By] AS [Created_By], 
+    [SLAStatus_view].[Supervisor_email] AS [Supervisor_email], 
+    [SLAStatus_view].[Date_Modifiied] AS [Date_Modifiied], 
+    [SLAStatus_view].[Modified_By] AS [Modified_By], 
+    [SLAStatus_view].[CBN_SLA_Limit_in_days] AS [CBN_SLA_Limit_in_days], 
+    [SLAStatus_view].[Internal_Limit_in_days] AS [Internal_Limit_in_days], 
+    [SLAStatus_view].[SLA_STATUS] AS [SLA_STATUS]
+    FROM [dbo].[SLAStatus_view] AS [SLAStatus_view]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="SLAViolationChecker_view" EntityType="Self.SLAViolationChecker_view" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [SLAViolationChecker_view].[Tracking_Reference_Number] AS [Tracking_Reference_Number], 
+    [SLAViolationChecker_view].[Name_Of_Complainant] AS [Name_Of_Complainant], 
+    [SLAViolationChecker_view].[Subject_Of_Complaint] AS [Subject_Of_Complaint], 
+    [SLAViolationChecker_view].[Complaint_Description] AS [Complaint_Description], 
+    [SLAViolationChecker_view].[Date_Received] AS [Date_Received], 
+    [SLAViolationChecker_view].[Account_Branch_Name] AS [Account_Branch_Name], 
+    [SLAViolationChecker_view].[Date_Created] AS [Date_Created], 
+    [SLAViolationChecker_view].[Created_By] AS [Created_By], 
+    [SLAViolationChecker_view].[Supervisor_email] AS [Supervisor_email], 
+    [SLAViolationChecker_view].[Date_Modifiied] AS [Date_Modifiied], 
+    [SLAViolationChecker_view].[Modified_By] AS [Modified_By], 
+    [SLAViolationChecker_view].[CBN_SLA_Limit] AS [CBN_SLA_Limit], 
+    [SLAViolationChecker_view].[Internal_Limit] AS [Internal_Limit], 
+    [SLAViolationChecker_view].[DateDiff] AS [DateDiff], 
+    [SLAViolationChecker_view].[SLA_STATUS] AS [SLA_STATUS]
+    FROM [dbo].[SLAViolationChecker_view] AS [SLAViolationChecker_view]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="User_View" EntityType="Self.User_View" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [User_View].[Id] AS [Id], 
+    [User_View].[Login] AS [Login], 
+    [User_View].[Group_Id] AS [Group_Id], 
+    [User_View].[LastLoginDate] AS [LastLoginDate], 
+    [User_View].[UserStatus] AS [UserStatus], 
+    [User_View].[CapturedBy] AS [CapturedBy], 
+    [User_View].[CaptureDate] AS [CaptureDate], 
+    [User_View].[GroupName] AS [GroupName], 
+    [User_View].[GroupStatus] AS [GroupStatus], 
+    [User_View].[defaultpage] AS [defaultpage], 
+    [User_View].[UserType] AS [UserType], 
+    [User_View].[CategoryName] AS [CategoryName]
+    FROM [dbo].[User_View] AS [User_View]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CCMSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+
+<EntityContainer Name="CCMSEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ApplicationResources" EntityType="CCMSModel.ApplicationResources" />
+          <EntitySet Name="ErrorLog" EntityType="CCMSModel.ErrorLog" />
+          <EntitySet Name="GroupResources" EntityType="CCMSModel.GroupResources" />
+          <EntitySet Name="UserGroup" EntityType="CCMSModel.UserGroup" />
+          <EntitySet Name="UsersLogs" EntityType="CCMSModel.UsersLogs" />
+          <EntitySet Name="ComplaintsCategory" EntityType="CCMSModel.ComplaintsCategory" />
+          <EntitySet Name="ComplaintsCategoryMatrix" EntityType="CCMSModel.ComplaintsCategoryMatrix" />
+          <EntitySet Name="GroupResources_View" EntityType="CCMSModel.GroupResources_View" />
+          <EntitySet Name="SLAViolationChecker_view" EntityType="CCMSModel.SLAViolationChecker_view" />
+          <EntitySet Name="Users" EntityType="CCMSModel.Users" />
+          <EntitySet Name="SLAStatus_view" EntityType="CCMSModel.SLAStatus_view" />
+          <EntitySet Name="User_View" EntityType="CCMSModel.User_View" />
+          <EntitySet Name="CustomerComplaints" EntityType="CCMSModel.CustomerComplaints" />
+        </EntityContainer>
+        <EntityType Name="ApplicationResources">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ResouceName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ErrorLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Method" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="LineNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="OtherInfo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="GroupResources">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Group_Id" Type="Int32" Nullable="false" />
+          <Property Name="ApplicationResource_Id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GroupName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="defaultpage" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="UsersLogs">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserRole" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BranchID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BranchName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IPAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LoginTime" Type="DateTime" Precision="3" />
+          <Property Name="LogoutTime" Type="DateTime" Precision="3" />
+          <Property Name="isLoggedIn" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ComplaintsCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryId" Type="Int32" />
+          <Property Name="CategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Notify" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ComplaintsCategoryMatrix">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+          <Property Name="SubCategory" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="SLA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="InternalSLA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CBNCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="GroupResources_View">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="GroupName" />
+            <PropertyRef Name="Status" />
+            <PropertyRef Name="Resource_Id" />
+            <PropertyRef Name="ResouceName" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="GroupName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Resource_Id" Type="Int32" Nullable="false" />
+          <Property Name="ResouceName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="defaultpage" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="SLAViolationChecker_view">
+          <Key>
+            <PropertyRef Name="Supervisor_email" />
+            <PropertyRef Name="SLA_STATUS" />
+          </Key>
+          <Property Name="Tracking_Reference_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name_Of_Complainant" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Subject_Of_Complaint" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Complaint_Description" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <Property Name="Date_Received" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Account_Branch_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Date_Created" Type="DateTime" Precision="3" />
+          <Property Name="Created_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Supervisor_email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Date_Modifiied" Type="DateTime" Precision="3" />
+          <Property Name="Modified_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CBN_SLA_Limit" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Internal_Limit" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DateDiff" Type="Int32" />
+          <Property Name="SLA_STATUS" Type="String" Nullable="false" MaxLength="19" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SessionID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Supervisor_id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Supervisor_email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastLoginDate" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CaptureDate" Type="DateTime" Precision="3" />
+          <Property Name="CapturedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Group_Id" Type="Int32" />
+          <Property Name="UserType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Branch" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TeamEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CategoryName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="SLAStatus_view">
+          <Key>
+            <PropertyRef Name="Supervisor_email" />
+            <PropertyRef Name="SLA_STATUS" />
+          </Key>
+          <Property Name="Tracking_Reference_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Account_Branch_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name_Of_Consultant" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Type_Of_Client" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Name_Of_Complainant" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="First_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Middle_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Last_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Unique_Identification_No" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Account_Number" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Account_Type" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Account_Currency" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="Address1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Address2" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Country" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="Postal_Code" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Cell_Phone_Number" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Office_Number" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Complaint_Channel" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Complaint_Location_Branch" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Email_Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Complaint_Sub_Category_Code" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="Subject_Of_Complaint" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Complaint_Description" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <Property Name="Date_Received" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Date_Closed" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Amount_In_Dispute" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="Amount_Refunded_Petitioner" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="Amount_Recovered_by_Bank" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="Action_Taken" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Status_Of_Complaint" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Remarks_by_Bank" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <Property Name="Date_Created" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Created_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Supervisor_email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Date_Modifiied" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Modified_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CBN_SLA_Limit_in_days" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Internal_Limit_in_days" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SLA_STATUS" Type="String" Nullable="false" MaxLength="41" FixedLength="false" Unicode="false" />
+          <Property Name="Complaint_Category" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="User_View">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Login" />
+            <PropertyRef Name="UserStatus" />
+            <PropertyRef Name="GroupName" />
+            <PropertyRef Name="GroupStatus" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Login" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Group_Id" Type="Int32" />
+          <Property Name="LastLoginDate" Type="DateTime" Precision="3" />
+          <Property Name="UserStatus" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CapturedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CaptureDate" Type="DateTime" Precision="3" />
+          <Property Name="GroupName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="GroupStatus" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="defaultpage" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CategoryName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="CustomerComplaints">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tracking_Reference_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Account_Branch_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name_Of_Consultant" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Type_Of_Client" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Name_Of_Complainant" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="First_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Middle_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Last_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Unique_Identification_No" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Account_Number" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Account_Type" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Account_Currency" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="Address1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Address2" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Country" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="Postal_Code" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Cell_Phone_Number" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Office_Number" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Complaint_Channel" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Complaint_Location_Branch" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Complaint_Location_City" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Email_Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Complaint_Category" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Complaint_Sub_Category" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Complaint_Sub_Category_Code" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="Subject_Of_Complaint" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Complaint_Description" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <Property Name="Date_Received" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Date_Closed" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description_of_Resolution" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Amount_In_Dispute" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="Amount_Refunded_Petitioner" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="Amount_Recovered_by_Bank" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="Action_Taken" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Status_Of_Complaint" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Remarks_by_Bank" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <Property Name="Date_Created" Type="DateTime" Precision="3" />
+          <Property Name="Date_Modifiied" Type="DateTime" Precision="3" />
+          <Property Name="Created_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Modified_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+         <EntityContainerMapping StorageEntityContainer="CCMSModelStoreContainer" CdmEntityContainer="CCMSEntities">
+          <EntitySetMapping Name="ApplicationResources">
+            <EntityTypeMapping TypeName="CCMSModel.ApplicationResources">
+              <MappingFragment StoreEntitySet="ApplicationResources">
+                <ScalarProperty Name="ResouceName" ColumnName="ResouceName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ErrorLog">
+            <EntityTypeMapping TypeName="CCMSModel.ErrorLog">
+              <MappingFragment StoreEntitySet="ErrorLog">
+                <ScalarProperty Name="OtherInfo" ColumnName="OtherInfo" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="LineNumber" ColumnName="LineNumber" />
+                <ScalarProperty Name="Method" ColumnName="Method" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GroupResources">
+            <EntityTypeMapping TypeName="CCMSModel.GroupResources">
+              <MappingFragment StoreEntitySet="GroupResources">
+                <ScalarProperty Name="ApplicationResource_Id" ColumnName="ApplicationResource_Id" />
+                <ScalarProperty Name="Group_Id" ColumnName="Group_Id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserGroup">
+            <EntityTypeMapping TypeName="CCMSModel.UserGroup">
+              <MappingFragment StoreEntitySet="UserGroup">
+                <ScalarProperty Name="defaultpage" ColumnName="defaultpage" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UsersLogs">
+            <EntityTypeMapping TypeName="CCMSModel.UsersLogs">
+              <MappingFragment StoreEntitySet="UsersLogs">
+                <ScalarProperty Name="isLoggedIn" ColumnName="isLoggedIn" />
+                <ScalarProperty Name="LogoutTime" ColumnName="LogoutTime" />
+                <ScalarProperty Name="LoginTime" ColumnName="LoginTime" />
+                <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
+                <ScalarProperty Name="BranchName" ColumnName="BranchName" />
+                <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+                <ScalarProperty Name="UserRole" ColumnName="UserRole" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ComplaintsCategory">
+            <EntityTypeMapping TypeName="CCMSModel.ComplaintsCategory">
+              <MappingFragment StoreEntitySet="ComplaintsCategory">
+                <ScalarProperty Name="Notify" ColumnName="Notify" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ComplaintsCategoryMatrix">
+            <EntityTypeMapping TypeName="CCMSModel.ComplaintsCategoryMatrix">
+              <MappingFragment StoreEntitySet="ComplaintsCategoryMatrix">
+                <ScalarProperty Name="CBNCode" ColumnName="CBNCode" />
+                <ScalarProperty Name="InternalSLA" ColumnName="InternalSLA" />
+                <ScalarProperty Name="SLA" ColumnName="SLA" />
+                <ScalarProperty Name="SubCategory" ColumnName="SubCategory" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GroupResources_View">
+            <EntityTypeMapping TypeName="CCMSModel.GroupResources_View">
+              <MappingFragment StoreEntitySet="GroupResources_View">
+                <ScalarProperty Name="defaultpage" ColumnName="defaultpage" />
+                <ScalarProperty Name="ResouceName" ColumnName="ResouceName" />
+                <ScalarProperty Name="Resource_Id" ColumnName="Resource_Id" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SLAViolationChecker_view">
+            <EntityTypeMapping TypeName="CCMSModel.SLAViolationChecker_view">
+              <MappingFragment StoreEntitySet="SLAViolationChecker_view">
+                <ScalarProperty Name="SLA_STATUS" ColumnName="SLA_STATUS" />
+                <ScalarProperty Name="DateDiff" ColumnName="DateDiff" />
+                <ScalarProperty Name="Internal_Limit" ColumnName="Internal_Limit" />
+                <ScalarProperty Name="CBN_SLA_Limit" ColumnName="CBN_SLA_Limit" />
+                <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+                <ScalarProperty Name="Date_Modifiied" ColumnName="Date_Modifiied" />
+                <ScalarProperty Name="Supervisor_email" ColumnName="Supervisor_email" />
+                <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+                <ScalarProperty Name="Date_Created" ColumnName="Date_Created" />
+                <ScalarProperty Name="Account_Branch_Name" ColumnName="Account_Branch_Name" />
+                <ScalarProperty Name="Date_Received" ColumnName="Date_Received" />
+                <ScalarProperty Name="Complaint_Description" ColumnName="Complaint_Description" />
+                <ScalarProperty Name="Subject_Of_Complaint" ColumnName="Subject_Of_Complaint" />
+                <ScalarProperty Name="Name_Of_Complainant" ColumnName="Name_Of_Complainant" />
+                <ScalarProperty Name="Tracking_Reference_Number" ColumnName="Tracking_Reference_Number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="CCMSModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="TeamEmail" ColumnName="TeamEmail" />
+                <ScalarProperty Name="Branch" ColumnName="Branch" />
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
+                <ScalarProperty Name="Group_Id" ColumnName="Group_Id" />
+                <ScalarProperty Name="CapturedBy" ColumnName="CapturedBy" />
+                <ScalarProperty Name="CaptureDate" ColumnName="CaptureDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
+                <ScalarProperty Name="Supervisor_email" ColumnName="Supervisor_email" />
+                <ScalarProperty Name="Supervisor_id" ColumnName="Supervisor_id" />
+                <ScalarProperty Name="SessionID" ColumnName="SessionID" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SLAStatus_view">
+            <EntityTypeMapping TypeName="CCMSModel.SLAStatus_view">
+              <MappingFragment StoreEntitySet="SLAStatus_view">
+                <ScalarProperty Name="Complaint_Category" ColumnName="Complaint_Category" />
+                <ScalarProperty Name="SLA_STATUS" ColumnName="SLA_STATUS" />
+                <ScalarProperty Name="Internal_Limit_in_days" ColumnName="Internal_Limit_in_days" />
+                <ScalarProperty Name="CBN_SLA_Limit_in_days" ColumnName="CBN_SLA_Limit_in_days" />
+                <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+                <ScalarProperty Name="Date_Modifiied" ColumnName="Date_Modifiied" />
+                <ScalarProperty Name="Supervisor_email" ColumnName="Supervisor_email" />
+                <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+                <ScalarProperty Name="Date_Created" ColumnName="Date_Created" />
+                <ScalarProperty Name="Remarks_by_Bank" ColumnName="Remarks_by_Bank" />
+                <ScalarProperty Name="Status_Of_Complaint" ColumnName="Status_Of_Complaint" />
+                <ScalarProperty Name="Action_Taken" ColumnName="Action_Taken" />
+                <ScalarProperty Name="Amount_Recovered_by_Bank" ColumnName="Amount_Recovered_by_Bank" />
+                <ScalarProperty Name="Amount_Refunded_Petitioner" ColumnName="Amount_Refunded_Petitioner" />
+                <ScalarProperty Name="Amount_In_Dispute" ColumnName="Amount_In_Dispute" />
+                <ScalarProperty Name="Date_Closed" ColumnName="Date_Closed" />
+                <ScalarProperty Name="Date_Received" ColumnName="Date_Received" />
+                <ScalarProperty Name="Complaint_Description" ColumnName="Complaint_Description" />
+                <ScalarProperty Name="Subject_Of_Complaint" ColumnName="Subject_Of_Complaint" />
+                <ScalarProperty Name="Complaint_Sub_Category_Code" ColumnName="Complaint_Sub_Category_Code" />
+                <ScalarProperty Name="Email_Address" ColumnName="Email_Address" />
+                <ScalarProperty Name="Complaint_Location_Branch" ColumnName="Complaint_Location_Branch" />
+                <ScalarProperty Name="Complaint_Channel" ColumnName="Complaint_Channel" />
+                <ScalarProperty Name="Office_Number" ColumnName="Office_Number" />
+                <ScalarProperty Name="Cell_Phone_Number" ColumnName="Cell_Phone_Number" />
+                <ScalarProperty Name="Postal_Code" ColumnName="Postal_Code" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="Account_Currency" ColumnName="Account_Currency" />
+                <ScalarProperty Name="Account_Type" ColumnName="Account_Type" />
+                <ScalarProperty Name="Account_Number" ColumnName="Account_Number" />
+                <ScalarProperty Name="Unique_Identification_No" ColumnName="Unique_Identification_No" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+                <ScalarProperty Name="Middle_Name" ColumnName="Middle_Name" />
+                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+                <ScalarProperty Name="Name_Of_Complainant" ColumnName="Name_Of_Complainant" />
+                <ScalarProperty Name="Type_Of_Client" ColumnName="Type_Of_Client" />
+                <ScalarProperty Name="Name_Of_Consultant" ColumnName="Name_Of_Consultant" />
+                <ScalarProperty Name="Account_Branch_Name" ColumnName="Account_Branch_Name" />
+                <ScalarProperty Name="Tracking_Reference_Number" ColumnName="Tracking_Reference_Number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_View">
+            <EntityTypeMapping TypeName="CCMSModel.User_View">
+              <MappingFragment StoreEntitySet="User_View">
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
+                <ScalarProperty Name="defaultpage" ColumnName="defaultpage" />
+                <ScalarProperty Name="GroupStatus" ColumnName="GroupStatus" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="CaptureDate" ColumnName="CaptureDate" />
+                <ScalarProperty Name="CapturedBy" ColumnName="CapturedBy" />
+                <ScalarProperty Name="UserStatus" ColumnName="UserStatus" />
+                <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
+                <ScalarProperty Name="Group_Id" ColumnName="Group_Id" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CustomerComplaints">
+            <EntityTypeMapping TypeName="CCMSModel.CustomerComplaints">
+              <MappingFragment StoreEntitySet="CustomerComplaints">
+                <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+                <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+                <ScalarProperty Name="Date_Modifiied" ColumnName="Date_Modifiied" />
+                <ScalarProperty Name="Date_Created" ColumnName="Date_Created" />
+                <ScalarProperty Name="Remarks_by_Bank" ColumnName="Remarks_by_Bank" />
+                <ScalarProperty Name="Status_Of_Complaint" ColumnName="Status_Of_Complaint" />
+                <ScalarProperty Name="Action_Taken" ColumnName="Action_Taken" />
+                <ScalarProperty Name="Amount_Recovered_by_Bank" ColumnName="Amount_Recovered_by_Bank" />
+                <ScalarProperty Name="Amount_Refunded_Petitioner" ColumnName="Amount_Refunded_Petitioner" />
+                <ScalarProperty Name="Amount_In_Dispute" ColumnName="Amount_In_Dispute" />
+                <ScalarProperty Name="Description_of_Resolution" ColumnName="Description_of_Resolution" />
+                <ScalarProperty Name="Date_Closed" ColumnName="Date_Closed" />
+                <ScalarProperty Name="Date_Received" ColumnName="Date_Received" />
+                <ScalarProperty Name="Complaint_Description" ColumnName="Complaint_Description" />
+                <ScalarProperty Name="Subject_Of_Complaint" ColumnName="Subject_Of_Complaint" />
+                <ScalarProperty Name="Complaint_Sub_Category_Code" ColumnName="Complaint_Sub_Category_Code" />
+                <ScalarProperty Name="Complaint_Sub_Category" ColumnName="Complaint_Sub_Category" />
+                <ScalarProperty Name="Complaint_Category" ColumnName="Complaint_Category" />
+                <ScalarProperty Name="Email_Address" ColumnName="Email_Address" />
+                <ScalarProperty Name="Complaint_Location_City" ColumnName="Complaint_Location_City" />
+                <ScalarProperty Name="Complaint_Location_Branch" ColumnName="Complaint_Location_Branch" />
+                <ScalarProperty Name="Complaint_Channel" ColumnName="Complaint_Channel" />
+                <ScalarProperty Name="Office_Number" ColumnName="Office_Number" />
+                <ScalarProperty Name="Cell_Phone_Number" ColumnName="Cell_Phone_Number" />
+                <ScalarProperty Name="Postal_Code" ColumnName="Postal_Code" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="Account_Currency" ColumnName="Account_Currency" />
+                <ScalarProperty Name="Account_Type" ColumnName="Account_Type" />
+                <ScalarProperty Name="Account_Number" ColumnName="Account_Number" />
+                <ScalarProperty Name="Unique_Identification_No" ColumnName="Unique_Identification_No" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+                <ScalarProperty Name="Middle_Name" ColumnName="Middle_Name" />
+                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+                <ScalarProperty Name="Name_Of_Complainant" ColumnName="Name_Of_Complainant" />
+                <ScalarProperty Name="Type_Of_Client" ColumnName="Type_Of_Client" />
+                <ScalarProperty Name="Name_Of_Consultant" ColumnName="Name_Of_Consultant" />
+                <ScalarProperty Name="Account_Branch_Name" ColumnName="Account_Branch_Name" />
+                <ScalarProperty Name="Tracking_Reference_Number" ColumnName="Tracking_Reference_Number" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="False" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,396 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="pages_MasterPage" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <title>Customer Complaints Management System</title>
+
+
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="font-awesome/css/font-awesome.css" rel="stylesheet" />
+
+    <!-- Toastr style -->
+    <link href="css/plugins/toastr/toastr.min.css" rel="stylesheet" />
+
+    <!-- Gritter -->
+    <link href="js/plugins/gritter/jquery.gritter.css" rel="stylesheet" />
+
+    <link href="css/plugins/ladda/ladda-themeless.min.css" rel="stylesheet" />
+
+    <link href="css/animate.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
+
+    <link href="css/plugins/sweetalert/sweetalert.css" rel="stylesheet" />
+
+    <link href="css/plugins/datapicker/datepicker3.css" rel="stylesheet" />
+    <link href="css/plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" />
+
+    <link href="css/plugins/iCheck/custom.css" rel="stylesheet" />
+    <link href="css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet" />
+
+
+    <style>
+        @media only screen and (max-width: 700px) {
+            #fadeshow1 {
+                display: none;
+            }
+        }
+
+        @media only screen and (min-width: 700px) {
+            #menubars {
+                display: none;
+            }
+        }
+
+        @media only screen and (min-width: 700px) {
+            #logoutmenu {
+                display: none;
+            }
+        }
+
+        .pace-done {
+            margin-right: 0px;
+        }
+
+          .accordion-toggle {
+            cursor: pointer;
+            margin: 0;
+        }
+
+        .accordion-content {
+            display: none;
+        }
+
+        .accordion-content.default {
+            display: block;
+        }
+
+       .completionListElement {
+            visibility: hidden;
+            margin: 0px !important;
+            background-color: inherit;
+            color: black;
+            border: solid 1px gray;
+            cursor: pointer;
+            text-align: left;
+            list-style-type: none;
+            font-family: Verdana;
+            font-size: 11px;
+            padding: 0;
+        }
+
+        .listItem {
+            background-color: white;
+            padding: 10px;
+        }
+
+        .highlightedListItem {
+            background-color: whitesmoke;
+            padding: 10px;
+        }
+
+        .ajax__calendar_container {
+            border: 1px solid #646464;
+            background-color: white;
+        }
+
+    </style>
+
+    <script type="text/javascript">
+        history.forward();
+    </script>
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+
+        <div id="wrapper">
+            <nav style="z-index: 1000;" class="navbar-default navbar-static-side" role="navigation">
+                <div style="margin-top: 87px;" class="sidebar-collapse">
+                    <ul class="nav metismenu" id="sidemenu" runat="server">
+                         <li class="nav-header" style="padding-top:10px; padding-bottom:10px;">
+                            
+                            <div class="dropdown profile-element" style="width: 100%;">
+                                <div style="text-align: center; width: 100%;">
+                                    <img id="userphoto" runat="server" alt="image" style="width:70px; height:70px;" class="img-circle" src="img/defaultuserimage.png" />
+                                </div>
+ 
+                                <a  data-toggle="dropdown" class="dropdown-toggle" href="#" aria-expanded="false">
+                                    <span style="text-align: center; width: 100%;" class="clear">
+                                        <span class="block m-t-xs"><strong class="font-bold"><span id="username" runat="server">UNKNOWN USER</span></strong>
+                                    </span>
+                                        <br />  
+                                        <span id="usergrouplbl" runat="server"></span>
+                                    </span>
+                                </a>
+
+                                <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                                    <li><a onclick="showloader();" href="../default.aspx?option=logout">Logout</a></li>
+                                </ul>
+
+                            </div>
+                        </li>
+
+                         <li  id="customercomplaint" runat="server">
+                            <a onclick="showloader();"  href="customercomplaint.aspx"><i class="fa fa-pen"></i><span onclick="showloader();"  class="nav-label">customer complaint </span></a>
+
+                        </li>
+
+                        <li  id="sla_status" runat="server">
+                            <a onclick="showloader();"  href="sla_status.aspx"><i class="fa fa-pen"></i><span onclick="showloader();"  class="nav-label">SLA Status </span></a>
+
+                        </li>
+
+                        <hr style="margin:5px;" />
+                                      
+                        <li  id="users" runat="server">
+                            <a onclick="showloader();"  href="users.aspx"><i class="fa fa-user"></i><span onclick="showloader();"  class="nav-label">System Users </span></a>
+
+                        </li>
+
+                        <li  id="usergrouplist" runat="server">
+                            <a onclick="showloader();"  href="usergrouplist.aspx"><i class="fa fa-group"></i><span onclick="showloader();"  class="nav-label">User Group </span></a>
+
+                        </li>
+
+                         <li id="UserGroupResourceList" runat="server">
+                            <a onclick="showloader();" href="UserGroupResourceList.aspx"><i class="fa fa-lock"></i><span onclick="showloader();" class="nav-label">Access Right </span></a>
+                        </li>
+                        
+                         <li id="applicationresourcelist" runat="server">
+                            <a onclick="showloader();" href="applicationresourcelist.aspx"><i class="fa fa-file-o"></i><span onclick="showloader();" class="nav-label">Access Items</span> </a>
+                        </li>
+
+  <hr style="margin:5px;" />
+                       
+                         <li id="errorlogpage" runat="server">
+                            <a onclick="showloader();" href="ErrorLogPage.aspx"><i class="fa fa-book"></i><span onclick="showloader();" class="nav-label">Error Log</span> </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+            </nav>
+        </div>
+
+        <div class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0px; margin-bottom: 6px; padding-bottom: 5px;">
+
+            <div style="float: left; margin-top: 10px; margin-left: 5px;">
+                <div id="menubars" class="navbar-minimalize minimalize-styl-2 btn btn-primary " style="margin-left: 10px; margin-right: 10px;"><i class="fa fa-bars"></i></div>
+                <img style="width: 50px;" src="img/SUN%20logo.png" />
+                <a style="display: none;" id="navbar_header" class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#">
+                    <i class="fa fa-bars"></i></a>
+            </div>
+
+            <a id="logoutmenu" style="float: right; margin-top: 30px; margin-right: 10px;" href="../default.aspx?option=logout">
+                <i class="fa fa-sign-out"></i>Log out
+            </a>
+
+
+            <div style="float: left">
+                <h1><b style="color: green;">&nbsp;Lotus Bank</b> -  Customer Complaints Management System</h1>
+                <%--..Tomorrow's Bank Today.--%>
+            </div>
+
+            <div id="fadeshow1" style="float: right; margin-top: 10px;">
+                <ul class="nav navbar-top-links navbar-right">
+                    <li>
+                        <strong>Last Login:</strong>   <span id="lastloginlbl" runat="server"></span>
+                    </li>
+                    &nbsp; &nbsp;
+                    |
+                    <li>
+                        <a href="../default.aspx?option=logout">
+                            <i class="fa fa-sign-out"></i>Log out
+                        </a>
+                    </li>
+                </ul>
+
+            </div>
+
+        </div>
+
+
+
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        </asp:ContentPlaceHolder>
+
+
+
+        <button id="loaderbtn" style="display: none;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#loaderpopup">
+        </button>
+        <div class="modal inmodal fade" id="loaderpopup" data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        Please wait..
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mainly scripts -->
+        <script src="js/jquery-1.12.4.js"></script>
+        <script src="js/jquery-ui.js"></script> 
+        <%--<script src="js/jquery-2.1.1.js"></script>--%>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+        <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+
+        <!-- Flot -->
+        <script src="js/plugins/flot/jquery.flot.js"></script>
+        <script src="js/plugins/flot/jquery.flot.tooltip.min.js"></script>
+        <script src="js/plugins/flot/jquery.flot.spline.js"></script>
+        <script src="js/plugins/flot/jquery.flot.resize.js"></script>
+        <script src="js/plugins/flot/jquery.flot.pie.js"></script>
+
+        <!-- Peity -->
+        <script src="js/plugins/peity/jquery.peity.min.js"></script>
+        <script src="js/demo/peity-demo.js"></script>
+
+        <!-- Custom and plugin javascript -->
+        <script src="js/inspinia.js"></script>
+        <script src="js/plugins/pace/pace.min.js"></script>
+         <script src="js/plugins/iCheck/icheck.min.js"></script>
+      
+        <script src="js/plugins/bootstrap-tagsinput/bootstrap-tagsinput.js"></script>
+
+        <!-- jQuery UI -->
+        <script src="js/plugins/jquery-ui/jquery-ui.min.js"></script>
+
+        <!-- GITTER -->
+        <script src="js/plugins/gritter/jquery.gritter.min.js"></script>
+
+        <!-- Sparkline -->
+        <script src="js/plugins/sparkline/jquery.sparkline.min.js"></script>
+
+        <!-- Sparkline demo data  -->
+        <script src="js/demo/sparkline-demo.js"></script>
+
+        <!-- ChartJS-->
+        <script src="js/plugins/chartJs/Chart.min.js"></script>
+
+        <!-- Toastr -->
+        <script src="js/plugins/toastr/toastr.min.js"></script>
+
+
+        <!-- Ladda -->
+        <script src="js/plugins/ladda/spin.min.js"></script>
+        <script src="js/plugins/ladda/ladda.min.js"></script>
+        <script src="js/plugins/ladda/ladda.jquery.min.js"></script>
+
+        <script src="js/plugins/sweetalert/sweetalert.min.js"></script>
+
+        <script src="js/plugins/daterangepicker/daterangepicker.js"></script>
+        <script src="js/plugins/fullcalendar/moment.min.js"></script>
+        <script src="js/plugins/datapicker/bootstrap-datepicker.js"></script>
+         
+
+        <script>
+            $(document).ready(function () {
+                $('.i-checks').iCheck({
+                    checkboxClass: 'icheckbox_square-green',
+                    radioClass: 'iradio_square-green',
+                });
+            });
+
+
+           function callwebmethod(method, json_parameter, success, error) {
+              
+                $.ajax({
+                    type: "POST",
+                    data: json_parameter,
+                    url:  method,
+                    contentType: "application/json",
+                    success: function (data) {
+                         
+                        success(data);
+                    },
+                    error: function (er) {
+                        error(er);
+                    }
+                });
+            }
+
+            function show_autoloader() {
+                document.activeElement.style.backgroundImage = 'url(img/loader.gif)';
+                document.activeElement.style.backgroundRepeat = 'no-repeat';
+                document.activeElement.style.backgroundPosition = 'right';
+            }
+
+            function hide_autoloader() {
+                document.activeElement.style.backgroundImage = 'none';
+            }
+
+            function showmsg(title, msg, msgtype) {
+
+                swal({
+                    title: title,
+                    text: msg,
+                    type: msgtype
+                });
+
+            }
+ 
+            function showloader() {
+                 if ($('#loaderpopup').css('display') == 'none')
+                    $('#loaderbtn').click();
+            }
+
+            function hideloader() {
+
+                if ($('#loaderpopup').css('display') != 'none')
+                    $('#loaderbtn').click();
+            }
+
+            function formatnumber(n) {
+                n = n.replace(',', '');
+                n = n.toString()
+                while (true) {
+                    var n2 = n.replace(/(\d)(\d{3})($|,|\.)/g, '$1,$2$3')
+                    if (n == n2) break
+                    n = n2
+                }
+                return n
+            }
+
+            function revalidateinput(obj) {
+                if (obj.value != '') {
+                    $("#" + obj.id).removeClass('form-control compulsory error');
+                    $("#" + obj.id).addClass('form-control compulsory');
+                }
+            }
+
+            function validateallinputs() {
+                var valid = true;
+                $(".form-control").each(function () {
+                    var classname = '';
+                    classname = $("#" + this.id).attr('class').toLocaleString().toString() + '';
+
+                    if (classname == 'form-control compulsory' || classname == 'form-control compulsory error') {
+                        if ($(this).val() == '') {
+                            $("#" + this.id).addClass('form-control compulsory error');
+                            valid = false;
+                        }
+                    }
+                });
+                return valid;
+            }
+        </script>
+
+
+
+
+
+    </form>
+</body>
+</html>

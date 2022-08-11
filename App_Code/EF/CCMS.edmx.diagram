@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="731392de732a4445aa39a504feab925c" Name="Diagram1" ZoomLevel="73">
+        <EntityTypeShape EntityType="CCMSModel.ApplicationResources" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="CCMSModel.ErrorLog" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="CCMSModel.GroupResources" Width="1.5" PointX="4.75" PointY="3.75" />
+        <EntityTypeShape EntityType="CCMSModel.UserGroup" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="CCMSModel.UsersLogs" Width="1.5" PointX="8.75" PointY="0.75" />
+        <EntityTypeShape EntityType="CCMSModel.ComplaintsCategory" Width="1.5" PointX="8.75" PointY="4.75" />
+        <EntityTypeShape EntityType="CCMSModel.ComplaintsCategoryMatrix" Width="1.5" PointX="4.75" PointY="8.75" />
+        <EntityTypeShape EntityType="CCMSModel.GroupResources_View" Width="1.5" PointX="6.75" PointY="8.75" />
+        <EntityTypeShape EntityType="CCMSModel.SLAViolationChecker_view" Width="2.625" PointX="10.75" PointY="0.75" />
+        <EntityTypeShape EntityType="CCMSModel.Users" Width="1.5" PointX="6.5" PointY="4.75" />
+        <EntityTypeShape EntityType="CCMSModel.SLAStatus_view" Width="2.75" PointX="9.75" PointY="7.75" />
+        <EntityTypeShape EntityType="CCMSModel.User_View" Width="1.5" PointX="4.375" PointY="11.875" />
+        <EntityTypeShape EntityType="CCMSModel.CustomerComplaints" Width="2.375" PointX="0.75" PointY="3.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
